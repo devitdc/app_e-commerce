@@ -1,4 +1,4 @@
-[![Release version](https://img.shields.io/badge/release-v1.0.0-blue)]()
+[![Release version](https://img.shields.io/badge/release-v1.0.1-blue)]()
 [![Symfony version](https://img.shields.io/badge/symfony-5.4-blue)]()
 [![PHP version](https://img.shields.io/badge/php-8.0-blue)]()
 # Le Dressing Français
