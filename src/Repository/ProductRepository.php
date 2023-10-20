@@ -40,10 +40,28 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-    public function findProducts()
+    public function findProducts($slug = null)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->join('p.category', 'c')
+            ->andWhere('p.isActive = 1')
+            ->andWhere('c.isActive = 1');
+
+        if (!is_null($slug)) {
+            $query = $query->andWhere('p.slug = :value')
+                ->setParameter('value', "$slug");
+            return $query->getQuery()->getOneOrNullResult();
+        }
+
+        return $query->getQuery()->getResult();
+    }
+    public function findProductsBestSeller()
     {
         return $this->createQueryBuilder('p')
+            ->join('p.category', 'c')
             ->andWhere('p.isActive = 1')
+            ->andWhere('c.isActive = 1')
+            ->andWhere('p.isTopSeller = 1')
             ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
@@ -59,6 +77,7 @@ class ProductRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('p')
             ->select('c', 'p')
             ->join('p.category', 'c')
+            ->andWhere('c.isActive = 1')
             ->andWhere('p.isActive = 1')
             ->orderBy('p.id', 'DESC');
 
@@ -77,6 +96,8 @@ class ProductRepository extends ServiceEntityRepository
     public function findProductWithStock($id)
     {
         return $this->createQueryBuilder('p')
+            ->join('p.category', 'c')
+            ->andWhere('c.isActive = 1')
             ->andWhere('p.stock >= 1')
             ->andWhere('p.isActive = 1')
             ->andWhere('p.id = :id')

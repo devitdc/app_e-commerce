@@ -1,12 +1,16 @@
-[![Release version](https://img.shields.io/badge/release-v1.0.1-blue)]()
+[![Release version](https://img.shields.io/badge/release-v1.0.2-blue)]()
 [![Symfony version](https://img.shields.io/badge/symfony-5.4-blue)]()
 [![PHP version](https://img.shields.io/badge/php-8.0-blue)]()
 # Le Dressing Français
 
+Il s'agit d'une application de démonstration, développé par Vincent VELOSO Développeur Backend. Les données sont réinitialisées tous les jours.
+
+Pour plus d'informations : https://it-dc.fr/
+
 Application e-commerce avec Symfony 5.4 permettant la vente d'articles en ligne avec :
-* une gestion des articles (*ajout, modification, suppression*),
-* gestion de stock
-* gestion des catégories (*une par article*)
+* une gestion des articles (*ajout, modification, suppression, stock*),
+* Une gestion des catégories (une par article)
+* Une gestion des utilisateurs, avec un espace client pour le suivi des commandes, téléchargement des factures.
 
 Paiement avec l'API Stripe et envoi de notification mail avec l'API MailJet (*activation du compte, confirmation de commande, etc.*).
 
@@ -66,7 +70,7 @@ Voici la liste des comptes disponibles :
 Mettre à jour le fichier **.env** avant d'exécuter les commandes suivantes.
 
 ```bash
-composer install --no-dev --optimize-autloader
+composer install --no-dev --optimize-autoloader
 npm force install
 npm run build
 chmod +x bin/*

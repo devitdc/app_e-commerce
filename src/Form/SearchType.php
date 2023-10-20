@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Class\Search;
 use App\Entity\Category;
+use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -26,6 +27,11 @@ class SearchType extends AbstractType
             ])
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
+                'query_builder' => function(EntityRepository $repository) {
+                    return $repository->createQueryBuilder('c')
+                        ->andWhere('c.isActive = 1')
+                        ->orderBy('c.name', 'ASC');
+                },
                 'label' => 'Par catégories',
                 'attr' => [
                     'class' => 'mb-2 form-control-sm product-select-category-index',
